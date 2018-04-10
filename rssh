@@ -1,0 +1,81 @@
+#!/usr/bin/env expect 
+
+set args $argc
+
+proc f__print_usage {} {
+    send "Usage: rssh \[-u\] \[-t\] <router_name>\n"
+}
+
+if {$argc < 1} {
+    f__print_usage
+    exit 1
+}
+
+set user "root"
+set password "Embe1mpls\r"
+set method "ssh"
+
+set index 0
+if {$argc > 1} {
+    while {$index < $argc - 1} {
+	if {[lindex $argv $index] == "-u"} {
+	    set user "regress" 
+	    set password "MaRtInI\r"
+	    incr index
+	} elseif {[lindex $argv $index] == "-t"} {
+	    set method "telnet"
+	    incr index
+	} else {
+	    f__print_usage
+	    exit 1
+	}
+    }
+}
+
+set router [lindex $argv $index]
+
+if {$router == "?" || $router == "h"} {
+f__print_usage
+exit 0
+}
+
+if {$method == "ssh"} {
+    spawn $method $user@$router
+    expect {
+	-re "(p|P)assword:" {
+	    send $password
+	}
+    }
+} elseif {$method == "telnet"} {
+    set routercon $router
+    append routercon "-con"
+    
+    spawn $method $routercon
+    set timeout 30
+    while {1} {
+        expect {
+	    ">>" {
+		send "\r"
+	    }
+	    "login" {
+		send $user
+		send "\r"
+	    }
+	    "Password" {
+		send $password
+	    }
+	    "%" {
+		break
+	    }
+	    ">" {
+		break
+	    }
+	    "#" {
+		break
+	    }
+	}
+    }
+}
+
+interact
+exit 0
