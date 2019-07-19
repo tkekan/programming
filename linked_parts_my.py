@@ -30,7 +30,7 @@ def splitListToParts(root, k):
         temp = []
         prev = None
         while size > 0:
-            temp.append(tmp)
+            temp.append(tmp.data)
             if prev:
                 prev.next = tmp
             prev = tmp

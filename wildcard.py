@@ -36,7 +36,7 @@ def isMatch( s, p):
         
     return pi  == len(p)
 
-s = 'aa'
-p = 'ab*'
+s = 'geeksm'
+p = 'g*k*m'
 ret = isMatch(s, p)
 print ret
