@@ -15,7 +15,8 @@ def multiply(num1, num2):
         if carry > 0:
             result[r1+r2] += carry
         r1 += 1
-    print result
+    result.reverse()
+    print int(''.join(str(x) for x in result))
 
 
 multiply("123","456")
