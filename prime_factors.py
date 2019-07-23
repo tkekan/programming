@@ -13,5 +13,5 @@ def prime_factors(n):
             n = n / index
 
 
-prime_factors(315)
+prime_factors(121)
         
