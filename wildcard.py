@@ -38,5 +38,7 @@ def isMatch( s, p):
 
 s = 'geeksm'
 p = 'g*k*m'
+s = 'baaabab'
+p = '*****ba*****ab'
 ret = isMatch(s, p)
 print ret
