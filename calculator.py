@@ -23,6 +23,8 @@ def precedence(op):
         return 1
     elif op in ['*', '/']:
         return 2
+    elif op in ['(', ')']:
+        return -1
 
 def calculator_input(data):
     data = list(data)
@@ -42,12 +44,21 @@ def calculator_input(data):
                 if len(data_str):
                    data_s.append(data_str)
         else:
-            if len(op_s):
+            if data[index] == ')':
+                while op_s[-1] != '(':
+                    num2 = data_s.pop()
+                    num1 = data_s.pop()
+                    value = function_map[op_s.pop()](num1,num2)
+                    data_s.append(value)
+                op_s.pop()
+                continue
+            if len(op_s) and data[index] != '(':
                 while precedence(op_s[-1]) > precedence(data[index]):
                     num2 = data_s.pop()
                     num1 = data_s.pop()
                     value = function_map[op_s.pop()](num1,num2)
                     data_s.push(value)
+                    
             op_s.append(data[index])
 
     while len(op_s):
@@ -58,5 +69,5 @@ def calculator_input(data):
     print data_s[-1]
                     
 
-input_s = "43+4/2"         
+input_s = "(43+4)/2"         
 calculator_input(input_s)
