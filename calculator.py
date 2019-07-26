@@ -31,7 +31,6 @@ def calculator_input(data):
     data_s = []
     op_s = []
     result = 0
-    operator = None
     data_str = ''
     for index in range(0,len(data)):
         if data[index].isalnum():
@@ -69,5 +68,5 @@ def calculator_input(data):
     print data_s[-1]
                     
 
-input_s = "(43+4)/2"         
+input_s = "((43+4)/2)"         
 calculator_input(input_s)
