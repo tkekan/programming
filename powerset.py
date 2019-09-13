@@ -5,17 +5,19 @@ def addnum(res, num):
 	return res
 
 def powerset(nums, index, res):
+    if index == len(nums):
+        results.append(list(res))
+        return
 
-	if index == len(nums):
-		results.append(res)
-		return
-
-	powerset(nums, index + 1, addnum(res,nums[index]))
-	powerset(nums , index + 1, res)
-
+    results.append(list(res))
+    for i in range(index,len(nums)):
+        res.append(nums[i])
+        powerset(nums, i + 1,res) 
+        res.pop()
 
 
-results = [[]]
+
+results = []
 
 nums = [1,2,3]
 res = []
