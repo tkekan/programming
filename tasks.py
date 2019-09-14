@@ -5,10 +5,10 @@ def totaltime(tasks, k):
     time = 0
     start = 0
     for index in range(0, len(tasks)):
-        '''if index - start >= k + 1:
-            if index - tdic[tasks[start]] >= k + 1:
+        if time - start > k + 1:
+            if time - tdic[tasks[start]] > k + 1:
                 del tdic[tasks[start]]
-                start += 1'''
+                start += 1
         if tasks[index] not in tdic:
             tdic[tasks[index]] = time
             time += 1
@@ -27,7 +27,7 @@ def totaltime(tasks, k):
 
 
 
-tasks = [1,2,1,1,2,2,2,1,2,1,1,1]
+tasks = [1,2,1,1,2,2,2,1,2,3,2,3]
 #tasks = [1,2,1]
 time = totaltime(tasks, 2)
 assert time == 24
