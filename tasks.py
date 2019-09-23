@@ -16,7 +16,9 @@ def totaltime(tasks, k):
         else:
             previdx = tdic[tasks[index]]
             if time - previdx <= k:
-                time = time + ( k + 1) - (time - previdx)
+                newSlot = previdx + (k+1)
+                time = newSlot
+                #time = time + ( k + 1) - (time - previdx)
                 tdic[tasks[index]] = time
             else:
                 tdic[tasks[index]] = time
@@ -27,7 +29,7 @@ def totaltime(tasks, k):
 
 
 
-tasks = [1,2,1,1,2,2,2,1,2,3,2,3]
-#tasks = [1,2,1]
+#tasks = [1,2,1,1,2,2,2,1,2,3,2,3]
+tasks = [1,1,1,1]
 time = totaltime(tasks, 2)
-assert time == 24
+assert time == 21
