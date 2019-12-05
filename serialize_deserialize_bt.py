@@ -15,12 +15,15 @@ class Codec:
         :rtype: str
         """
         if root == None:
-            self.string.append(-1)
-            return self.string
-        self.string.append(root.val)
-        self.string = self.serialize(root.left)
-        self.string = self.serialize(root.right)
-        return self.string
+            #self.string.append(-1)
+            return '#'
+
+        string = ""
+        string += str(root.val)
+        string += self.serialize(root.left)
+        string += self.serialize(root.right)
+        return string
+       
         
 
     def deserialize(self, data):
@@ -32,9 +35,9 @@ class Codec:
         if len(data):
             val = data[0]
             data.pop(0)
-            if val == -1:
+            if val == '#':
                 return None
-            root = TreeNode(val)
+            root = TreeNode(int(val))
             root.left = self.deserialize(data)
             root.right = self.deserialize(data)
             return root
@@ -56,6 +59,7 @@ root.right = TreeNode(3)
 root.right.left = TreeNode(4)
 root.right.right = TreeNode(5)
 path = codec.serialize(root)
-print path
-root = codec.deserialize(path)
+print "Tanvir: %s" % path
+root = codec.deserialize(list(path))
+print root.val,root.left.val,root.right.val
 codec.preorder(root)
