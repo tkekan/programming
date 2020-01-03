@@ -186,7 +186,7 @@ height = root.height(root1)
 d = deque()
 
 #Level Order
-print " Level Order: ",
+print "*** Level Order: ***\n",
 for i in range(height + 1, 0, -1):
     root.levelorder(root, i)
 #End Level Order
@@ -283,6 +283,67 @@ def preorderConvert(root):
 
     return root
 
+
+def printSecondLargest(root, c):
+    if root == None or c >= 2:
+        return c
+
+    c = printSecondLargest(root.right, c)
+    c += 1
+    if c == 2:
+        print "\nSecond largest: %d" %root.data 
+        return c
+    c = printSecondLargest(root.left, c)   
+    return c
+
+def duplicate_subtrees(root,dic,res):
+    if root == None:
+        return '-1,'
+    
+    string = ''
+    string += duplicate_subtrees(root.left, dic, res )
+    string += duplicate_subtrees(root.right, dic, res)
+    string += str(root.data) + ','
+    
+    if string in dic:
+        temp = tuple()
+        for items in string[0:-1].split(','):
+            if int(items) != -1:
+                temp = temp + (items,)
+        res.add(temp)
+    else:
+        dic[string] = 1
+    
+    return string
+
+def lowest_common_ancestor(root, node1, node2):
+    if root == None:
+        return None
+
+    if root.data == node1 or root.data == node2:
+        return root.data
+
+    left = lowest_common_ancestor(root.left, node1, node2)
+    right = lowest_common_ancestor(root.right, node1, node2)
+
+    if left != None and right != None:
+        return root.data
+    elif left != None and right == None:
+        return left
+    else:
+        return right
+
+
+def preorder_stack(root, stack):
+    while root or len(stack):
+        if root:
+            print root.data,
+            if root.right:
+                stack.append(root.right)
+            root = root.left
+        else:
+            root = stack.pop()
+    
 root4 = Tree(10)
 root4.left = Tree(8)
 root4.right = Tree(2)
@@ -295,3 +356,45 @@ print "\npreorder Convert: \n"
 while root4:
     print str(root4.data) + "-",
     root4 = root4.right
+
+''' Duplicate subtrees '''
+root = Tree(1)
+root.left = Tree(2)
+root.left.left = Tree(4)
+root.right = Tree(3)
+root.right.left = Tree(2)
+root.right.left.left = Tree(4)
+root.right.right = Tree(4)
+dic = dict()
+print "\nPrinting duplicate subtrees: \n"
+res = set()
+duplicate_subtrees(root, dic, res)
+print res
+''' Duplicate subtrees '''
+
+bstroot = Tree(50)
+bstroot.left =  Tree(30)
+bstroot.left.left =  Tree(20)
+bstroot.left.right =  Tree(40)
+bstroot.right =  Tree(70)
+bstroot.right.left = Tree(60)
+bstroot.right.right = Tree(80)
+
+printSecondLargest(bstroot, 0)
+
+root = Tree(3)
+root.left = Tree(6)
+root.right = Tree(8)
+root.left.left = Tree(2)
+root.left.right = Tree(11)
+root.left.right.left = Tree(9)
+root.left.right.right = Tree(5)
+root.right.right = Tree(13)
+root.right.right.left = Tree(7)
+print "\nLowest common ancestor : \n"
+print lowest_common_ancestor(root,9,7)
+
+
+print "\nIterative Preorder Traversal \n"
+print preorder_stack(root,[])
+

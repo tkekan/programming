@@ -42,7 +42,7 @@ def ismatch(s, p):
 
 	return dp[row][col]
 
-print ismatch("geeksforgeeks", "g*k**s")
+print ismatch("geeksforgeeks", "g*k**ss")
 
 			
 				

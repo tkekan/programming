@@ -1,9 +1,10 @@
 #include <iostream>
 
-#include <tr1/unordered_map>
+#include <unordered_map>
 #include <string>
+#include <vector>
 using namespace std;
-using namespace tr1;
+//using namespace tr1;
 
 int main()
 {
@@ -12,6 +13,9 @@ int main()
     string to = "xpf";
     string input = "Hello World";
     string output = "";
+    vector<string> v1 = { "xyzzy", "plugh", "abracadabra" };
+vector<string> v2({ "xyzzy", "plugh", "abracadabra" });
+vector<string> v3{ "xyzzy", "plugh", "abracadabra" }; 
     int i;
 
     for(int i=0 ;i<from.length(); i++) {

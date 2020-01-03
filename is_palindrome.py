@@ -24,5 +24,6 @@ class Solution(object):
 
 s = Solution()
 s_string = "A man, a plan, a canal: Panama"
+s_string = "race a car"
 print s.isPalindrome(s_string)
 

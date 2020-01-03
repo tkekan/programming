@@ -55,7 +55,42 @@ def findDuplicateSubtrees(root):
             [dic[root.val].append(x) for x in rchild]
     return root,dic[root.val]
 
-root = TreeNode(1)
+
+def utils2(root,m):
+    if not root:
+        return ""
+    ans = "("
+    ans += utils2(root.left,m)
+    ans += str(root.val)
+    ans += utils2(root.right,m)
+    ans += ")"
+
+    if ans in m and m[ans] == 1:
+        global res
+        res.append(ans)
+    else:
+        m[ans] = 1
+
+    return ans
+
+nodeMap = defaultdict(list)
+def outer(root):
+    def helper2(root,nodeMap):
+        if not root:
+            return ''
+        cur = str(root.val)
+        ans = cur + 'l' + helper2(root.left, nodeMap) + \
+                    'r' + helper2(root.right, nodeMap)
+        nodeMap[ans].append(root.val)
+        return ans
+    helper2(root,nodeMap)
+    ans = []
+    for keys,nodes in nodeMap.items():
+            if len(nodes) > 1:
+                print keys,nodes[0]
+    return ans
+
+root = TreeNode(3)
 root.left = TreeNode(2)
 root.left.left = TreeNode(4)
 root.right = TreeNode(3)
@@ -64,5 +99,10 @@ root.right.left = TreeNode(2)
 root.right.left.left = TreeNode(4)
 
 findDuplicateSubtrees(root)
+m = {}
+res = []
+utils2(root,m)
+print res
 print result
-
+"""Outer is better than others """
+print outer(root)

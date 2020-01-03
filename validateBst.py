@@ -24,8 +24,10 @@ def validateBST(root):
     prev, val = util(root, prev)
     print val
 
-root = BST(2)
+root = BST(5)
 root.left = BST(1)
-root.right = BST(3)
+root.right = BST(4)
+root.right.left = BST(3)
+root.right.right = BST(7)
 
 validateBST(root)

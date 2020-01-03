@@ -23,5 +23,5 @@ def remove( s, result, last_i, last_j, par):
     else:
 	result.append(reversed_s)
 
-result = removeInvalidParentheses('(((')
+result = removeInvalidParentheses('()(()')
 print result

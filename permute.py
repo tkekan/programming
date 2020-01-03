@@ -8,7 +8,9 @@ def toString(List):
 # 3. Ending index of the string.
 def permute(a, l, r):
     if l==r:
-        print toString(a)
+        if a not in res:
+            b = list(a)
+            res.append(b)
     else:
         for i in range(l,r+1):
             a[l], a[i] = a[i], a[l]
@@ -16,7 +18,9 @@ def permute(a, l, r):
             a[l], a[i] = a[i], a[l] # backtrack
  
 # Driver program to test the above function
-string = "ABC"
+res = []
+string = "112"
 n = len(string)
 a = list(string)
 permute(a, 0, n-1)
+print res

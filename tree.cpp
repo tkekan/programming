@@ -14,6 +14,17 @@ struct Node
   int data;
 };
 
+class DLL 
+{
+    public:
+        int val;
+        DLL *next;
+        DLL *prev;
+        DLL(): next(NULL), prev(NULL), val(0) {}
+        ~DLL() {
+            cout <<"Destructor called\n";
+        }
+};
 //initializetree(Node *root)
 
 
@@ -177,6 +188,54 @@ int printht(Node *root)
     else return (1 + dr);
 
 }
+
+void print_lvl_order_util(Node *root, DLL *dll, DLL **head1)
+{
+    if (root == NULL)
+        return;
+
+    dll->val += root->data;
+    if (!(*head1)->prev && !(*head1)->next) 
+        *head1 = dll;
+    if (root->left != NULL) {
+        if (dll->prev == NULL) {
+            dll->prev = new DLL;
+            dll->prev->next = dll;
+        }
+        print_lvl_order_util(root->left, dll->prev, head1);
+    }
+    if (root->right != NULL) {
+        if (dll->next == NULL) {
+            dll->next = new DLL;
+            dll->next->prev = dll;
+        }
+        print_lvl_order_util(root->right, dll->next, head1);
+    }
+
+}
+
+void print_level_order_sum(Node  *root)
+{
+    if (!root)
+        return;
+
+    DLL *dll = new DLL;
+    DLL *head = new DLL;
+    print_lvl_order_util(root, dll, &head);
+    DLL *temp = head;
+    int sum = 0;
+    while (temp->prev) {
+        temp = temp->prev;
+    }
+
+    while (temp != NULL) {
+        printf("%d ", temp->val);
+        temp = temp->next;
+    }
+    fflush(stdout);
+}
+
+
 int main()
 {
     int minData = 0;
@@ -196,5 +255,7 @@ int main()
    printLevelOrder(root);
    cout << endl << "Height of tree: ";
    cout << printht(root);
+    cout << "\nLevel order sum of Tree:\n";
+    print_level_order_sum(root);
     return 0;
 }

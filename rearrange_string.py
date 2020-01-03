@@ -2,9 +2,11 @@ import heapq
 
 def rearrange(string):
 	tdic = {}
+    #Get frequency for each string
 	for items in list(string):
 		tdic[items] = tdic.get(items,0) + 1
 	h = []
+    #Insert the frequency inside heap
 	for items in tdic.items():
 		item = [items[1]*-1, items[0]]
 		heapq.heappush(h, item)
@@ -24,5 +26,5 @@ def rearrange(string):
 		print out
 		
 		
-string="aab"
+string="aaabc"
 rearrange(string)

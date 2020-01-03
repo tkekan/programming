@@ -26,14 +26,21 @@ def precedence(op):
     elif op in ['(', ')']:
         return -1
 
+def isoperarand(op):
+    if op in ['+', '-', '*', '/', '(']:
+        return True
+    return False
+
 def calculator_input(data):
     data = list(data)
     data_s = []
     op_s = []
     result = 0
     data_str = ''
+    prevoperand = False
     for index in range(0,len(data)):
         if data[index].isalnum():
+            prevoperand = False
             data_str += data[index]
             try:
                 if not data[index+1].isalnum():
@@ -57,7 +64,7 @@ def calculator_input(data):
                     num1 = data_s.pop()
                     value = function_map[op_s.pop()](num1,num2)
                     data_s.push(value)
-                    
+            prev_operand = True        
             op_s.append(data[index])
 
     while len(op_s):

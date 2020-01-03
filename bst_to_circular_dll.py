@@ -9,9 +9,9 @@ main_head = None
 class Solution(object):
     def util(self, root, head):
         if root == None:
-            return None,head
+            return head
         
-        node,head = self.util(root.left, head)
+        head = self.util(root.left, head)
         if head == None:
             self.main_head = root
             head = root
@@ -20,8 +20,8 @@ class Solution(object):
             head.right = root
             head = root
             
-        node,head = self.util(root.right, head)
-        return node,head
+        head = self.util(root.right, head)
+        return head
 
     def treeToDoublyList(self, root):
         """
@@ -29,7 +29,7 @@ class Solution(object):
         :rtype: Node
         """
         self.main_head = None
-        node, head = self.util(root, None)
+        head = self.util(root, None)
         if head:
             head.right = self.main_head
             self.main_head.left = head

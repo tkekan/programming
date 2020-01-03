@@ -1,0 +1,31 @@
+- Two files: id_management_non_optimized.c and id_management_optimized.c
+- The algorithm maintains ID's upto INT_MAX only and accepts data in the form of strings of any length. 
+
+Usage: gcc -w id_management_optimized.c 
+       gcc -w id_management_non_optimized.c
+
+A) id_management_non_optimized.c:
+1) There is a array of pointers of size INT_MAX that acts as the global counter for 1-1 mapping.
+2) The arbitrary data is hashed in a small hash table, where chaining is used in case of collision
+3) Thus lookup of data by ID, which was created in past, gives quick result O(1) since 
+   the global counter array points to the data node as a 1-1 mapping.
+4) In case of any ID which is deleted, it takes O(n) from current position to find the next exmpty slot
+5) The above is inefficient if, all the slots are filled and if just few ID's are freed, the algorithm will
+   go through a worst case of INT_MAX to find the next free slot.(This algo doesn't maintain a free list)
+6) This approach was chosen first to complete the task. Later on improvements were done in the below part. 
+
+
+B) id_management_optimized.c:
+1) In this approach, both ID's and data is stored in small hash tables with chaining. 
+2) In this algorithm, once the global count index is exhausted, it is not used to allocate future id's
+3) This approach, saves the already allocated ID's in a freeList / LinkedList once they are deleted. 
+4) As we know once hashed counter ID nodes will always map to the same position inside the hash, 
+   I just mark it's data portion to be NULL idicating it has been freed, whenever data is deleted using it's ID.  
+5) Once free, this node goes into the freeList implemented as a queue. 
+6) Any future allocations takes place using the freeList only.(Faster than above approach) 
+7) This approach is thus better than the non-optimized solution and works better when most of the ID's are allocated
+8) Haven't tested it for all the cases though.
+
+Both the approaches uses FNV hash for hashing the data accepted as string. The distribution of keys is good but haven't tested
+with variety of input. Also, the table size is 100k which might need to change on testing with various different inputs. 
+Again, the hashing function might not be the ideal. 

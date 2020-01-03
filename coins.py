@@ -2,10 +2,17 @@
 
 
 
-def numOfWays(val , coins):
-    for i in range(0, len(coins)):
-        while sum != val:
-            sum = sum + coins[i]
+def numOfWays(amount , coins):
+    dp = [0] * (amount + 1)
+
+    dp[0] = 1
+    for c in coins:
+        for i in range(1,amount+1):
+            if c <= i:
+                dp[i] = dp[i] + dp[i-c]
+    print dp
+    return dp[-1]
 
 coins = [1,2,4,10]
-numOfWays(50, coins)
+coins = [1, 2, 5]
+numOfWays(5, coins)

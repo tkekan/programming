@@ -11,14 +11,14 @@ def findMaxConsecutiveOnes(nums):
                 while index < len(nums) and nums[index] == 0: 
                     index += 1
                 if index >= len(nums):
-                    return maxlen
+                    break
             else:
                 start = index
                 while index < len(nums) and nums[index] == 1: 
                     index += 1
                 maxlen = max(maxlen, index - start)
                 if index >= len(nums):
-                    return maxlen
+                    break
         return maxlen
 
 nums = [1,1,0,1,1,1]

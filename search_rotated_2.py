@@ -15,6 +15,7 @@ class Solution(object):
             if nums[low] == nums[high]:
                 low  += 1
                 high -= 1
+                continue
             if nums[high] >= nums[mid]:
                 if target <= nums[high]: low = mid + 1
                 else: high = mid - 1

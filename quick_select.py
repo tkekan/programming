@@ -29,7 +29,7 @@ def util(nums,l,r,k):
 
 def kclosest(nums,k):
     util(nums,0,len(nums)-1,k)
-    print nums[:k]
+    print nums[k]
 
 
 nums = [10,5,0,1,20,4]

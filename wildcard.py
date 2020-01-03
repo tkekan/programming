@@ -40,5 +40,7 @@ s = 'geeksm'
 p = 'g*k*m'
 s = 'baaabab'
 p = '*****ba*****ab'
+s = 'aaaabbbb'
+p = 'a*bb'
 ret = isMatch(s, p)
 print ret

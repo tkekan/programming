@@ -22,13 +22,17 @@ class Solution(object):
         maxtop = max(maxsum, lsum +rsum + root.val)
         
         self.res = max(self.res, maxtop)
-        return maxtop
+        return maxsum
 
-root = Node(-10)
-root.left = Node(9)
-root.right = Node(20)
-root.right.left = Node(15)
-root.right.right = Node(7)
+root = Node(5)
+root.left = Node(4)
+root.left.left = Node(11)
+root.left.left.left = Node(7)
+root.left.left.right = Node(2)
+root.right = Node(8)
+root.right.left = Node(13)
+root.right.right = Node(4)
+root.right.right.right = Node(1)
 s = Solution()
 s.maxPathSum(root)
 print s.res

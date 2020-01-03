@@ -12,5 +12,6 @@ def minimum_search(nums):
         else:
             high = mid
 
-nums = [4,5,0,1,2,3]
+nums = [4,5,6,0,1,2,3]
+nums = [0,1,2,3]
 print minimum_search(nums)

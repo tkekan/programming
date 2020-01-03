@@ -42,7 +42,7 @@ def longestUniqueSubsttr(string):
             cur_len = i - prev_index
  
         # update the index of current character
-        visited[ord(string[i])] = i
+       visited[ord(string[i])] = i
  
     # Compare the length of last NRCS with max_len and update
     # max_len if needed

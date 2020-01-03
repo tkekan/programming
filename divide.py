@@ -23,4 +23,4 @@ def divide(num, divi):
     print quo
 
 
-divide(1502,30)
+divide(100,30)
