@@ -1,0 +1,34 @@
+#Display the caption for all windows with the name
+#escape `e
+escape @e
+hardstatus alwayslastline
+hardstatus string '%{= kG}[%{G}%H%? %1`%?%{g}][%= %{= kw}%-w%{+b yk} %n*%t%?(%u)%? %{-}%+w %=%{g}][%{B}%m/%d %{W}%C%A%{g}]'
+#caption always
+#caption string "%{kw}%-w%{wr}%n %t%{-}%+w"
+
+screen -t $       1
+stuff "source ~/.bash_profile"
+screen -t $       2
+stuff "source ~/.bash_profile"
+screen -t Python  1 python # put python at the end
+select 0
+bind c screen 1 # window numbering starts at 1 not 0
+bind 0 select 10
+
+vbell off
+bell_msg 'Bell in window %n'
+defscrollback 10000
+scrollback 10000
+## Make F1 to switch to window 1 and so on
+#bindkey -k k1 select 0
+##bindkey -k k2 select 1
+##bindkey -k k3 select 2
+##bindkey -k k4 select 3
+##bindkey -k k5 select 4
+##bindkey -k k6 select 5
+##bindkey -k k7 select 6
+##bindkey -k k8 select 7
+##bindkey -k k9 select 8
+##bindkey -k k10 select 9
+bindkey  ``^[[C next
+bindkey  ``^[[D prev
