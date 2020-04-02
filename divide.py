@@ -20,7 +20,18 @@ def divide(num, divi):
         bits = (bits | 0x1) << 1
         
     quo  = findones(bits)
-    print quo
+    print quo,num
 
+def divide2(num,divi):
+    res = 0
+    while num >= divi:
+        bits = 0
+        while num >= (divi << bits):
+            bits += 1
+        res = res + (1 << (bits-1))
+        num = num - (divi << (bits-1))
+    print res,num
 
-divide(100,30)
+divide2(10,3)
+num = 30
+print num >> 30

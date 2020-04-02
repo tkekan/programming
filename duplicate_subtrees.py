@@ -77,7 +77,7 @@ nodeMap = defaultdict(list)
 def outer(root):
     def helper2(root,nodeMap):
         if not root:
-            return ''
+            return '#'
         cur = str(root.val)
         ans = cur + 'l' + helper2(root.left, nodeMap) + \
                     'r' + helper2(root.right, nodeMap)
@@ -87,6 +87,7 @@ def outer(root):
     ans = []
     for keys,nodes in nodeMap.items():
             if len(nodes) > 1:
+                print "Node-->",
                 print keys,nodes[0]
     return ans
 
@@ -101,8 +102,8 @@ root.right.left.left = TreeNode(4)
 findDuplicateSubtrees(root)
 m = {}
 res = []
-utils2(root,m)
-print res
-print result
+#utils2(root,m)
+#print res
+#print result
 """Outer is better than others """
 print outer(root)

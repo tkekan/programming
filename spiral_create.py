@@ -34,6 +34,6 @@ def create(n):
         lc += 1
     print matrix
 
-create(2)
+create(4)
         
 

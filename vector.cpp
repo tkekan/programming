@@ -1,6 +1,8 @@
 #include<iostream>
 #include<vector>
 #include <algorithm> 
+#include <queue>
+#include <iomanip>
 
 using namespace std;
 
@@ -10,14 +12,69 @@ bool sortF(vector<int> &a, vector<int> &b) {
     return a[0] < b[0];
 }
 
+
+void queue_ds() {
+    queue<pair<string,int>> q;
+    
+    string s = "cog";
+    cout << s.substr(0,-1) + "_" + s.substr(2);
+    for (int i=0; i < s.length(); i+=1) {
+        if (i == 0) {
+            cout << "_" + s.substr(i+1) << endl;
+        }
+        string newstr = s.substr(0,i) + "_" + s.substr(i+1);
+        cout << newstr << endl;
+    }
+    q.push(make_pair("cog",1));
+    while (q.size() > 0) {
+        auto p = q.front();
+        q.pop();
+        cout << p.first << p.second;
+    }
+    
+}
 int main()
 {
+
+    //queue_ds();
+    int i = '1' - '0';
+    cout << "Int value" << i;
     vector<vector <int> > v(10);
     vector<vector<int>> dirs = {{0,1},{0,-1},{1,0},{-1,0}};
     sort(dirs.begin(), dirs.end(), sortF);
+    string s = "abc";
+    for (int i = 0; i < s.size(); i+= 1) {
+        if (s[i] != s[i+100])
+            cout << "Not equal" << s[i] << s[i+1] << endl;
+    }
+        
     for (auto dx: dirs) {
         cout << dx[0] << ":" << dx[1] << endl;
     }
+
+    vector<vector<int>> v3 (3);
+    cout << "Tanvir: " << v3.size() << endl; 
+
+    vector<int> v4 (10,-1);
+    cout << "V4: " << v4.size() << endl;
+    for (int i = 0; i < v4.size(); i++) {
+        cout << v4[i] << setw(4);
+    }
+    vector<int> copy = {1,2,3};
+    sort(copy.begin(), copy.end(), greater<int>());
+    for (int i = 0 ; i < v3.size(); i+=1) {
+        v3[i].resize(3);
+        v3[i] = copy;
+    }
+    cout << "Tanvir: " << v3.size() << v3[0].size();
+    return 0;
+
+    for (auto i : v3[0]) 
+        cout << i << "\t";
+
+    
+    
+
     return 0;
     //v.resize(10);
     

@@ -1,25 +1,29 @@
-def findAllConcatenatedWordsInADict(words):
-    d = {w:True for w in words}
-    wordsSet = set(words)
-    def is_valid(chars):
-        # check if a string that is comprised entirely of at least 1 shorter words in the given array.
-        if not chars: return False
-        if chars in d: return True
-        for i in range(len(chars)):
-            if chars[:i+1] in wordsSet:
-                if i == len(chars) -1 or is_valid(chars[i+1:]):
-                    d[chars] = True
-                    return True
-        return False
-    
-    ans = []
-    for word in words:
-        for i in range(len(word)):
-            if word[:i+1] in wordsSet:
-                if is_valid(word[i+1:]):
-                    ans.append(word)
-                    break
-    return ans
 
-words = ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]
-print findAllConcatenatedWordsInADict(words)
+
+
+
+def concat(w):
+    seen = set(words for words in w)
+    res = []
+    for words in w:
+        seen.remove(words)
+        dp = [False] * (len(words) + 1)
+        dp[0] = True
+        for i in range(0,len(words)):
+            if dp[i] == False:
+                continue
+            c = ""
+            for j in range(i,len(words)):
+                c += words[j]
+                if c in seen:
+                    dp[j+1] = True
+
+        if dp[len(words)] == True:
+            res.append(words)
+        seen.add(words)
+
+    print res
+        
+
+w = ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]
+concat(w)

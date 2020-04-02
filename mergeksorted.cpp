@@ -9,7 +9,8 @@ struct Node {
  
 // 'compare' function used to build up the
 // priority queue
-struct compare {
+class compare {
+    public:
     bool operator()(struct Node* a, struct Node* b)
     {
         return a->data > b->data;

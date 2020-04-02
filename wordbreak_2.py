@@ -28,6 +28,6 @@ def wordBreak(s, wordDict):
     d = {}
     return util(s, wordDict, d)
 
-s = "catssanddog"
-w = ["cat", "cats", "s","and", "sand", "dog"]
+s = "catsanddog"
+w = ["cat", "cats", "and", "sand", "dog"]
 print wordBreak(s,w)

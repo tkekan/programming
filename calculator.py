@@ -6,7 +6,7 @@ def sub(a,b):
     return int(a)-int(b)
     
 def mult(a,b):
-    return int(a) * init(b)
+    return int(a) * int(b)
 
 def div(a,b):
     try:
@@ -32,14 +32,13 @@ def isoperarand(op):
     return False
 
 def calculator_input(data):
-    data = list(data)
     data_s = []
     op_s = []
     result = 0
     data_str = ''
     prevoperand = False
     for index in range(0,len(data)):
-        if data[index].isalnum():
+        if data[index].isdigit():
             prevoperand = False
             data_str += data[index]
             try:
@@ -63,7 +62,7 @@ def calculator_input(data):
                     num2 = data_s.pop()
                     num1 = data_s.pop()
                     value = function_map[op_s.pop()](num1,num2)
-                    data_s.push(value)
+                    data_s.append(value)
             prev_operand = True        
             op_s.append(data[index])
 
@@ -76,4 +75,6 @@ def calculator_input(data):
                     
 
 input_s = "((43+4)/2)"         
-calculator_input(input_s)
+s = "(5-(1+5*3)))"
+s = '(2+5*3)'
+calculator_input(s)
